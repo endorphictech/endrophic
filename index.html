@@ -46,7 +46,7 @@
     padding:15px 24px;font-size:14px;box-shadow:0 14px 30px -10px rgba(22,137,122,.55);
   }
   @media (max-width:720px){
-    .floating-cta{bottom:16px;right:16px;left:16px;justify-content:center;padding:14px 20px;font-size:13.5px;}
+    .floating-cta{bottom:16px;right:16px;padding:13px 20px;font-size:13px;}
   }
   .btn-outline{background:transparent;border:1.5px solid rgba(255,255,255,.4);color:#fff;}
   .btn-outline:hover{border-color:#fff;transform:translateY(-2px);}
@@ -271,7 +271,9 @@
   /* ===== COMPARISON ===== */
   .compare{background:var(--paper);}
   .compare .wrap{max-width:920px;}
-  .compare-table{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:24px;background:var(--card);}
+  .compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:24px;}
+  .compare-hint{display:none;font-size:12.5px;color:var(--grey-light);margin-top:10px;}
+  .compare-table{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card);min-width:640px;}
   .compare-head{display:grid;grid-template-columns:1fr 1fr 1fr;background:var(--paper-2);}
   .compare-head div{padding:20px 24px;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;}
   .compare-head .c-label{color:var(--grey-light);}
@@ -364,8 +366,8 @@
     .work-grid{grid-template-columns:1fr;}
     .standby-grid{grid-template-columns:1fr;}
     .footer-grid{flex-direction:column;}
-    .compare-head,.compare-row{grid-template-columns:1fr 1fr;}
-    .compare-head .c-them,.compare-row .c-them{display:none;}
+    .compare-head div,.compare-row div{padding:14px;font-size:12.5px;white-space:nowrap;}
+    .compare-hint{display:block;}
   }
 </style>
 </head>
@@ -390,7 +392,7 @@
 </header>
 
 <!-- ===== FLOATING CTA (all screens) ===== -->
-<a href="#contact" class="floating-cta btn btn-primary"><span class="shine"></span>Book a Discovery Call</a>
+<a href="https://wa.me/919422788557?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Discovery%20Call%20with%20Endorphic." target="_blank" rel="noopener" class="floating-cta btn btn-primary"><span class="shine"></span>Book a Discovery Call</a>
 
 <!-- ===== HERO CAROUSEL ===== -->
 <section class="hero" id="top">
@@ -410,7 +412,7 @@
       </div>
       <div class="hero-cta hero-in d2">
         <a href="solutions.html" class="btn btn-primary"><span class="shine"></span>Explore Solutions</a>
-        <a href="#contact" class="btn btn-outline">Book a Discovery Call</a>
+        <a href="https://wa.me/919422788557?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Discovery%20Call%20with%20Endorphic." target="_blank" rel="noopener" class="btn btn-outline">Book a Discovery Call</a>
       </div>
     </div>
   </div>
@@ -431,24 +433,12 @@
   </div>
 </div>
 
-<!-- ===== TRUSTED BY (dummy placeholder logos) ===== -->
-<div class="logos-section">
-  <p class="logos-label">Built for practices like these</p>
-  <div class="logos-track">
-    <div class="logo-chip"><span class="mark"></span><span>Sharma Clinic</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Wellness Hub</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>CarePoint Hospital</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Dr. Mehta's Practice</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Vitality Diagnostics</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Pune Family Clinic</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Sharma Clinic</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Wellness Hub</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>CarePoint Hospital</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Dr. Mehta's Practice</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Vitality Diagnostics</span></div>
-    <div class="logo-chip"><span class="mark"></span><span>Pune Family Clinic</span></div>
+<!-- ===== STATEMENT ===== -->
+<section class="statement reveal">
+  <div class="wrap">
+    <h2>Better communication. <span class="g">Better patient experiences.</span> Better healthcare.</h2>
   </div>
-</div>
+</section>
 
 <!-- ===== THE PROBLEM ===== -->
 <section class="problem reveal">
@@ -693,6 +683,8 @@
   <div class="wrap">
     <span class="eyebrow">Why Endorphic</span>
     <h2 style="font-size:clamp(26px,3.6vw,40px);">The Healthcare-Only Difference</h2>
+    <p class="compare-hint">Swipe sideways to see the full comparison →</p>
+    <div class="compare-scroll">
     <div class="compare-table">
       <div class="compare-head">
         <div class="c-label"></div>
@@ -704,6 +696,7 @@
       <div class="compare-row"><div class="c-label">Approach</div><div class="c-us">Diagnose before we prescribe</div><div class="c-them">Templated packages</div></div>
       <div class="compare-row"><div class="c-label">Engagement</div><div class="c-us">Understand, then recommend</div><div class="c-them">Sell first, learn later</div></div>
       <div class="compare-row"><div class="c-label">Perspective</div><div class="c-us">Long-term communication partner</div><div class="c-them">One-off campaigns</div></div>
+    </div>
     </div>
   </div>
 </section>
@@ -733,6 +726,25 @@
   </div>
 </section>
 
+<!-- ===== TRUSTED BY (dummy placeholder logos) ===== -->
+<div class="logos-section">
+  <p class="logos-label">Built for practices like these</p>
+  <div class="logos-track">
+    <div class="logo-chip"><span class="mark"></span><span>Sharma Clinic</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Wellness Hub</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>CarePoint Hospital</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Dr. Mehta's Practice</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Vitality Diagnostics</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Pune Family Clinic</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Sharma Clinic</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Wellness Hub</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>CarePoint Hospital</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Dr. Mehta's Practice</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Vitality Diagnostics</span></div>
+    <div class="logo-chip"><span class="mark"></span><span>Pune Family Clinic</span></div>
+  </div>
+</div>
+
 <!-- ===== FOUNDER / WHAT WE STAND BY ===== -->
 <section class="founder reveal" id="why">
   <div class="line-art" style="bottom:-20px;left:-40px;width:340px;height:160px;opacity:0.08;">
@@ -753,20 +765,13 @@
   </div>
 </section>
 
-<!-- ===== STATEMENT ===== -->
-<section class="statement reveal">
-  <div class="wrap">
-    <h2>Better communication. <span class="g">Better patient experiences.</span> Better healthcare.</h2>
-  </div>
-</section>
-
 <!-- ===== FINAL CTA ===== -->
 <section class="final-cta" id="contact">
   <div class="wrap reveal">
     <span class="eyebrow" style="justify-content:center;">Not Sure Where To Begin?</span>
     <h2>Let's build communication that makes a difference.</h2>
     <p>Every healthcare organisation is different. We'll help you identify the challenges that matter most and recommend the right solution for your goals.</p>
-    <a href="mailto:hello@endorphic.in" class="btn btn-primary"><span class="shine"></span>Book a Discovery Call</a>
+    <a href="https://wa.me/919422788557?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Discovery%20Call%20with%20Endorphic." target="_blank" rel="noopener" class="btn btn-primary"><span class="shine"></span>Book a Discovery Call</a>
   </div>
 </section>
 
@@ -791,7 +796,7 @@
         <div class="footer-col">
           <h5>Pune</h5>
           <a href="mailto:hello@endorphic.in">hello@endorphic.in</a>
-          <a href="#contact">Book a Discovery Call</a>
+          <a href="https://wa.me/919422788557?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Discovery%20Call%20with%20Endorphic." target="_blank" rel="noopener">Book a Discovery Call</a>
         </div>
       </div>
     </div>
