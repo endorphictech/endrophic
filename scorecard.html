@@ -216,6 +216,7 @@
     .footer-grid{flex-direction:column;}
   }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -298,7 +299,7 @@
             </div>
             <div>
               <label for="leadPhone">Mobile Number</label>
-              <input type="tel" id="leadPhone" name="Mobile" required>
+              <input type="tel" id="leadPhone" name="Mobile" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" minlength="10" title="Enter a valid 10-digit mobile number" placeholder="10-digit mobile number" required>
             </div>
           </div>
           <div>
@@ -559,47 +560,72 @@ document.getElementById('gateForm').addEventListener('submit', (e) => {
   document.getElementById('hiddenScore').value = overall + '/100';
   document.getElementById('hiddenAnswers').value = answerSummary;
 
-  const payload = {
-    name: document.getElementById('leadName').value,
-    practice: document.getElementById('leadPractice').value,
-    email: document.getElementById('leadEmail').value,
-    phone: document.getElementById('leadPhone').value,
-    overallScore: overall,
-    dimensions: {
-      visibility: Math.round((dimScores.visibility.earned/dimScores.visibility.max)*100),
-      firstimpression: Math.round((dimScores.firstimpression.earned/dimScores.firstimpression.max)*100),
-      education: Math.round((dimScores.education.earned/dimScores.education.max)*100),
-      trust: Math.round((dimScores.trust.earned/dimScores.trust.max)*100),
-      conversion: Math.round((dimScores.conversion.earned/dimScores.conversion.max)*100)
-    },
-    rawAnswers: answerSummary
+  const leadName = document.getElementById('leadName').value;
+  const leadPractice = document.getElementById('leadPractice').value;
+  const leadEmail = document.getElementById('leadEmail').value;
+  const leadPhone = document.getElementById('leadPhone').value;
+
+  const dims = {
+    visibility: Math.round((dimScores.visibility.earned/dimScores.visibility.max)*100),
+    firstimpression: Math.round((dimScores.firstimpression.earned/dimScores.firstimpression.max)*100),
+    education: Math.round((dimScores.education.earned/dimScores.education.max)*100),
+    trust: Math.round((dimScores.trust.earned/dimScores.trust.max)*100),
+    conversion: Math.round((dimScores.conversion.earned/dimScores.conversion.max)*100)
   };
 
   const form = e.target;
-  const requests = [];
-
-  // Primary: Google Apps Script -> logs to Sheet + emails hello@endorphic.in + emails the user
-  if(GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.indexOf('PASTE_YOUR') === -1){
-    requests.push(
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify(payload)
-      }).catch(() => {})
-    );
-  }
-
-  // Safety net while Apps Script is being set up: also send via FormSubmit
-  requests.push(
-    fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' }).catch(() => {})
-  );
-
   const submitBtn = form.querySelector('button[type="submit"]');
   submitBtn.disabled = true;
   submitBtn.textContent = 'Calculating your score...';
 
-  Promise.allSettled(requests).finally(() => { showResults(); });
+  // Show the results to the visitor immediately - no reason to make them wait
+  showResults();
+
+  // Let the score-ring and bar animations finish rendering, then capture a screenshot
+  // of the results card to send by email instead of a plain-text summary
+  setTimeout(async () => {
+    let screenshotBase64 = '';
+    try {
+      const target = document.getElementById('stepResults');
+      const canvas = await html2canvas(target, { backgroundColor: '#FFFFFF', scale: 2, useCORS: true });
+      screenshotBase64 = canvas.toDataURL('image/png').split(',')[1];
+    } catch (err) {
+      // If the screenshot fails for any reason, submissions still go through without it
+      screenshotBase64 = '';
+    }
+
+    const payload = {
+      name: leadName,
+      practice: leadPractice,
+      email: leadEmail,
+      phone: leadPhone,
+      overallScore: overall,
+      dimensions: dims,
+      rawAnswers: answerSummary,
+      screenshot: screenshotBase64
+    };
+
+    const requests = [];
+
+    // Primary: Google Apps Script -> logs to Sheet + emails both inboxes with the screenshot attached
+    if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.indexOf('PASTE_YOUR') === -1) {
+      requests.push(
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(payload)
+        }).catch(() => {})
+      );
+    }
+
+    // Safety net while Apps Script is being set up: also send via FormSubmit (text only, no screenshot)
+    requests.push(
+      fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' }).catch(() => {})
+    );
+
+    Promise.allSettled(requests);
+  }, 1600);
 });
 
 function tierLabel(score){
@@ -689,6 +715,12 @@ function showResults(){
 
   window.scrollTo({top: document.getElementById('quizCard').offsetTop - 100, behavior:'smooth'});
 }
+
+// Mobile number: strip anything that isn't a digit as the person types, cap at 10 digits
+const leadPhoneInput = document.getElementById('leadPhone');
+leadPhoneInput?.addEventListener('input', () => {
+  leadPhoneInput.value = leadPhoneInput.value.replace(/\D/g, '').slice(0, 10);
+});
 
 const menuToggle = document.querySelector('.menu-toggle');
 const navLinks = document.querySelector('.nav-links');
