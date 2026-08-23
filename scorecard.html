@@ -107,15 +107,26 @@
   .menu-toggle span{display:block;width:20px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;}
 
   /* ===== HERO ===== */
-  .hero{padding:64px 24px 20px;text-align:center;}
-  .hero .wrap{max-width:760px;}
+  .hero{padding:60px 24px 30px;}
+  .hero .wrap{max-width:1080px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:50px;align-items:center;}
   .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--paper-2);border:1px solid var(--border);padding:8px 18px;border-radius:999px;font-size:12.5px;font-weight:600;color:var(--teal-btn);margin-bottom:24px;}
   .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--grad);}
-  .hero h1{font-size:clamp(28px,4.4vw,46px);font-weight:700;margin-bottom:18px;}
-  .hero .subhead{font-size:16px;color:var(--grey);max-width:560px;margin:0 auto 30px;}
-  .hero-meta{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;font-size:13px;color:var(--grey-light);}
+  .hero h1{font-size:clamp(28px,4vw,42px);font-weight:700;margin-bottom:18px;}
+  .hero .subhead{font-size:16px;color:var(--grey);max-width:520px;margin-bottom:28px;}
+  .hero-meta{display:flex;justify-content:flex-start;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--grey-light);}
   .hero-meta span{display:flex;align-items:center;gap:7px;}
   .hero-meta svg{width:15px;height:15px;stroke:var(--teal-btn);}
+  .hero-media{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/4.3;order:2;}
+  .hero-media img{width:100%;height:100%;object-fit:cover;}
+  .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(200deg, rgba(22,137,122,0.14), rgba(90,200,90,0.04) 60%, transparent);}
+  .hero-media-badge{
+    position:absolute;bottom:16px;left:16px;right:16px;background:#fff;border-radius:14px;padding:14px 16px;
+    box-shadow:0 12px 24px -10px rgba(22,24,29,.25);z-index:2;
+  }
+  .hero-media-badge .score-preview{display:flex;align-items:center;gap:10px;}
+  .hero-media-badge .score-preview .ring{width:36px;height:36px;border-radius:50%;background:var(--grad-btn);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800;flex-shrink:0;}
+  .hero-media-badge .score-preview span.label{font-size:12px;font-weight:600;color:var(--ink);}
+  .hero-media-badge .score-preview span.sub{display:block;font-size:10.5px;color:var(--grey-light);font-weight:400;margin-top:1px;}
 
   /* ===== QUIZ CONTAINER ===== */
   .quiz-section{padding:20px 24px 100px;}
@@ -205,6 +216,10 @@
     html{scroll-behavior:auto;}
     .btn-primary::after{animation:none !important;}
   }
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-media{order:-1;max-width:340px;margin:0 auto 8px;aspect-ratio:4/3.4;}
+  }
   @media (max-width:720px){
     .nav-links{display:none;}
     .menu-toggle{display:block;}
@@ -216,7 +231,6 @@
     .footer-grid{flex-direction:column;}
   }
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -238,13 +252,27 @@
 <!-- ===== HERO ===== -->
 <section class="hero">
   <div class="wrap">
-    <span class="hero-badge"><span class="dot"></span>Free Digital Health Scorecard</span>
-    <h1>Find out how your practice appears to <span class="grad-text">today's digital patient.</span></h1>
-    <p class="subhead">A free 2-minute self-assessment across 5 dimensions of your practice's digital presence — with an instant score and personalised recommendations.</p>
-    <div class="hero-meta">
-      <span><svg viewBox="0 0 24 24" fill="none"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>2 minutes</span>
-      <span><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V9M11 19V4M18 19v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Score out of 100</span>
-      <span><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>No cost, no obligation</span>
+    <div>
+      <span class="hero-badge"><span class="dot"></span>Free Digital Health Scorecard</span>
+      <h1>Find out how your practice appears to <span class="grad-text">today's digital patient.</span></h1>
+      <p class="subhead">A free 2-minute self-assessment across 5 dimensions of your practice's digital presence — with an instant score and personalised recommendations.</p>
+      <div class="hero-meta">
+        <span><svg viewBox="0 0 24 24" fill="none"><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/></svg>2 minutes</span>
+        <span><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V9M11 19V4M18 19v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>Score out of 100</span>
+        <span><svg viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>No cost, no obligation</span>
+      </div>
+    </div>
+    <div class="hero-media">
+      <img src="https://images.pexels.com/photos/5214966/pexels-photo-5214966.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Doctor reviewing her practice's digital presence on her phone" width="900" height="1000" fetchpriority="high">
+      <div class="hero-media-badge">
+        <div class="score-preview">
+          <div class="ring">72</div>
+          <div>
+            <span class="label">Your Digital Health Score</span>
+            <span class="sub">See yours in 2 minutes</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -362,6 +390,7 @@
         <div class="footer-col">
           <h5>Pune</h5>
           <a href="mailto:hello@endorphic.in">hello@endorphic.in</a>
+          <a href="tel:+919422788557">+91 94227 88557</a>
           <a href="contact.html">Contact Us</a>
         </div>
       </div>
@@ -550,7 +579,7 @@ function showGate(){
 }
 
 // >>> PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL BETWEEN THE QUOTES BELOW <<<
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyngBcgG_FNl57SafXRvUBn5fkT2l1Gb48ToJH8gfJ_tFRPnJn1QX53Y_23KFHNMQ1OGA/exec";
+const GOOGLE_SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
 
 document.getElementById('gateForm').addEventListener('submit', (e) => {
   e.preventDefault();
@@ -581,51 +610,39 @@ document.getElementById('gateForm').addEventListener('submit', (e) => {
   // Show the results to the visitor immediately - no reason to make them wait
   showResults();
 
-  // Let the score-ring and bar animations finish rendering, then capture a screenshot
-  // of the results card to send by email instead of a plain-text summary
-  setTimeout(async () => {
-    let screenshotBase64 = '';
-    try {
-      const target = document.getElementById('stepResults');
-      const canvas = await html2canvas(target, { backgroundColor: '#FFFFFF', scale: 2, useCORS: true });
-      screenshotBase64 = canvas.toDataURL('image/png').split(',')[1];
-    } catch (err) {
-      // If the screenshot fails for any reason, submissions still go through without it
-      screenshotBase64 = '';
-    }
+  const recommendations = getRecommendations(dimScores).map(r => r.text);
 
-    const payload = {
-      name: leadName,
-      practice: leadPractice,
-      email: leadEmail,
-      phone: leadPhone,
-      overallScore: overall,
-      dimensions: dims,
-      rawAnswers: answerSummary,
-      screenshot: screenshotBase64
-    };
+  const payload = {
+    name: leadName,
+    practice: leadPractice,
+    email: leadEmail,
+    phone: leadPhone,
+    overallScore: overall,
+    dimensions: dims,
+    rawAnswers: answerSummary,
+    recommendations: recommendations
+  };
 
-    const requests = [];
+  const requests = [];
 
-    // Primary: Google Apps Script -> logs to Sheet + emails both inboxes with the screenshot attached
-    if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.indexOf('PASTE_YOUR') === -1) {
-      requests.push(
-        fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'text/plain' },
-          body: JSON.stringify(payload)
-        }).catch(() => {})
-      );
-    }
-
-    // Safety net while Apps Script is being set up: also send via FormSubmit (text only, no screenshot)
+  // Primary: Google Apps Script -> logs to Sheet + sends a designed HTML email to both inboxes
+  if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL.indexOf('PASTE_YOUR') === -1) {
     requests.push(
-      fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' }).catch(() => {})
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload)
+      }).catch(() => {})
     );
+  }
 
-    Promise.allSettled(requests);
-  }, 1600);
+  // Safety net while Apps Script is being set up: also send via FormSubmit (plain text)
+  requests.push(
+    fetch(form.action, { method: 'POST', body: new FormData(form), mode: 'no-cors' }).catch(() => {})
+  );
+
+  Promise.allSettled(requests);
 });
 
 function tierLabel(score){
@@ -633,6 +650,24 @@ function tierLabel(score){
   if(score >= 55) return {text:'Solid foundation, with clear room to grow.', color:'#147A6D'};
   if(score >= 30) return {text:'Early stage — a few focused changes could make a big difference.', color:'#B8860B'};
   return {text:'Significant opportunity — most of the easy wins are still ahead of you.', color:'#B8860B'};
+}
+
+const REC_MAP = {
+  visibility: "Your Google Business Profile is often the very first thing a patient sees — an incomplete or unclaimed profile means you may be invisible exactly when someone is searching for you.",
+  firstimpression: "A dated or missing website is often the biggest gap between how good your care actually is and how it comes across before a patient ever meets you.",
+  education: "Patients who understand a procedure beforehand tend to trust it more and ask fewer repeat questions in the room — educational content does real work for you.",
+  trust: "Credentials and testimonials are what turn a stranger into a booked patient. If they're hard to find, that trust-building moment is being lost.",
+  conversion: "Every extra step between 'interested' and 'booked' loses patients. A faster, easier way to reach you converts more enquiries into visits."
+};
+
+function getRecommendations(dimScores){
+  const weakDims = [];
+  Object.entries(dimScores).forEach(([key, d]) => {
+    const pct = Math.round((d.earned/d.max)*100);
+    if(pct < 55) weakDims.push(key);
+  });
+  const keysToShow = weakDims.length > 0 ? weakDims : ['visibility','trust'];
+  return keysToShow.slice(0,3).map(key => ({ label: dimScores[key].label, text: REC_MAP[key] })).filter(r => r.text);
 }
 
 function showResults(){
@@ -667,10 +702,8 @@ function showResults(){
 
   const dimContainer = document.getElementById('dimResults');
   dimContainer.innerHTML = '';
-  const weakDims = [];
   Object.values(dimScores).forEach(d => {
     const pct = Math.round((d.earned/d.max)*100);
-    if(pct < 55) weakDims.push(d.label);
     const row = document.createElement('div');
     row.className = 'dim-result-row';
     row.innerHTML = `
@@ -688,25 +721,13 @@ function showResults(){
     });
   }, 150);
 
-  const recMap = {
-    visibility: "Your Google Business Profile is often the very first thing a patient sees — an incomplete or unclaimed profile means you may be invisible exactly when someone is searching for you.",
-    firstimpression: "A dated or missing website is often the biggest gap between how good your care actually is and how it comes across before a patient ever meets you.",
-    education: "Patients who understand a procedure beforehand tend to trust it more and ask fewer repeat questions in the room — educational content does real work for you.",
-    trust: "Credentials and testimonials are what turn a stranger into a booked patient. If they're hard to find, that trust-building moment is being lost.",
-    conversion: "Every extra step between 'interested' and 'booked' loses patients. A faster, easier way to reach you converts more enquiries into visits."
-  };
   const recList = document.getElementById('recList');
   recList.innerHTML = '';
-  const dimsToShow = weakDims.length > 0 ? weakDims : ['visibility','trust'];
-  dimsToShow.slice(0,3).forEach(label => {
-    const key = Object.keys(dimScores).find(k => dimScores[k].label === label) || label.toLowerCase();
-    const text = recMap[key] || recMap[Object.keys(recMap).find(k => label.toLowerCase().includes(k))] || '';
-    if(text){
-      const item = document.createElement('div');
-      item.className = 'rec-item';
-      item.innerHTML = `<svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>${text}</span>`;
-      recList.appendChild(item);
-    }
+  getRecommendations(dimScores).forEach(rec => {
+    const item = document.createElement('div');
+    item.className = 'rec-item';
+    item.innerHTML = `<svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.5 6.5L21 11l-6.5 2.5L12 20l-2.5-6.5L3 11l6.5-2.5L12 2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>${rec.text}</span>`;
+    recList.appendChild(item);
   });
 
   const practiceName = document.getElementById('leadPractice').value || 'my practice';
