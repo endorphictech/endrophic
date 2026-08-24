@@ -79,8 +79,8 @@
     --grad-btn: linear-gradient(90deg,var(--teal-btn),var(--green-btn));
   }
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;overflow-x:hidden;width:100%;}
-  body{margin:0;font-family:'Poppins',sans-serif;background:var(--paper);color:var(--grey);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:'Poppins',sans-serif;background:var(--paper);color:var(--grey);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;}
   img,svg{display:block;max-width:100%;}
   img{width:100%;height:100%;object-fit:cover;}
   a{color:inherit;text-decoration:none;}
@@ -128,9 +128,11 @@
     max-width:var(--maxw);border:1px solid var(--border);
   }
   .logo{display:flex;align-items:center;gap:8px;}
-  .logo img{height:40px;width:auto;}
+  .logo img{height:53px;width:auto;}
   .nav-links{display:flex;align-items:center;gap:26px;}
   .nav-links a{font-size:13.5px;font-weight:500;color:var(--grey);transition:color .25s ease;}
+  .nav-scorecard-badge{background:var(--grad-btn);color:#fff !important;padding:8px 16px;border-radius:999px;font-weight:700 !important;transition:transform .2s ease,filter .2s ease !important;}
+  .nav-scorecard-badge:hover{filter:brightness(1.08);transform:translateY(-1px);}
   .nav-links a:hover{color:var(--ink);}
   .menu-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;}
   .menu-toggle span{display:block;width:20px;height:2px;background:var(--ink);margin:5px 0;border-radius:2px;}
@@ -361,13 +363,45 @@
   .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
   .work-card{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform .3s ease,box-shadow .3s ease;background:var(--paper);}
   .work-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
-  .work-media{aspect-ratio:4/3;overflow:hidden;}
+  .work-media{aspect-ratio:4/3;overflow:hidden;position:relative;}
   .work-media img{transition:transform .5s ease;}
   .work-card:hover .work-media img{transform:scale(1.06);}
+  .work-card.is-playable{cursor:pointer;}
+  .work-card.is-playable:focus-visible{outline:3px solid var(--teal-btn);outline-offset:2px;}
+  .work-play-btn{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.35));
+  }
+  .work-play-btn span{
+    width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.95);
+    display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.5);
+    transition:transform .25s ease;
+  }
+  .work-card.is-playable:hover .work-play-btn span{transform:scale(1.1);}
+  .work-play-btn svg{width:22px;height:22px;fill:var(--teal-btn);margin-left:3px;}
   .work-body{padding:22px 22px 26px;}
   .work-card .tag{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--teal-btn);margin-bottom:12px;font-weight:600;}
   .work-card h4{font-size:17px;margin-bottom:8px;font-weight:700;}
   .work-card p{font-size:13.5px;font-weight:300;color:var(--grey);}
+
+  /* ===== VIDEO MODAL ===== */
+  .video-modal{
+    display:none;position:fixed;inset:0;z-index:100;background:rgba(10,12,11,0.88);
+    align-items:center;justify-content:center;padding:24px;
+  }
+  .video-modal.open{display:flex;}
+  .video-modal-inner{width:100%;max-width:900px;position:relative;}
+  .video-modal-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 30px 70px -20px rgba(0,0,0,.6);}
+  .video-modal-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .video-modal-close{
+    position:absolute;top:-46px;right:0;width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,.12);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  }
+  .video-modal-close:hover{background:rgba(255,255,255,.22);}
+  .video-modal-close svg{width:18px;height:18px;stroke:#fff;}
+  @media (max-width:720px){
+    .video-modal-close{top:-42px;}
+  }
 
   /* ===== FOUNDER / STAND BY ===== */
   .founder{background:var(--ink);color:#fff;}
@@ -396,7 +430,7 @@
   footer{padding:60px 24px 30px;background:var(--card);border-top:1px solid var(--border);}
   .footer-grid{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;margin-bottom:40px;}
   .footer-logo{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
-  .footer-logo img{height:32px;width:auto;}
+  .footer-logo img{height:42px;width:auto;}
   .footer-tag{font-size:13px;font-weight:300;color:var(--grey);max-width:280px;}
   .footer-links{display:flex;gap:56px;flex-wrap:wrap;}
   .footer-col h5{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--grey-light);margin-bottom:14px;font-weight:600;}
@@ -447,14 +481,14 @@
 <header>
   <nav class="wrap">
     <a href="index.html" class="logo">
-      <img src="assets/endorphic-logo-nav.png" alt="Endorphic" width="134" height="40">
+      <img src="assets/endorphic-logo-nav.png" alt="Endorphic" width="135" height="53">
     </a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="solutions.html">Solutions</a>
-      <a href="scorecard.html" style="color:var(--teal-btn);font-weight:700;">Free Scorecard</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
+      <a href="scorecard.html" class="nav-scorecard-badge">Free Scorecard</a>
     </div>
     <button class="menu-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
@@ -480,7 +514,7 @@
         <p class="subhead" id="heroSubhead">Take our free 2-minute Digital Health Scorecard and get an instant score, plus personalised recommendations on your visibility, trust signals and patient experience.</p>
       </div>
       <div class="hero-cta hero-in d2">
-        <a href="scorecard.html" class="btn btn-primary"><span class="shine"></span>Claim Your Free Digital Health Scorecard</a>
+        <a href="scorecard.html" class="btn btn-primary"><span class="shine"></span>Get Your Free Scorecard</a>
         <a href="https://wa.me/919422788557?text=Hi%2C%20I%27d%20like%20to%20book%20a%20Discovery%20Call%20with%20Endorphic." target="_blank" rel="noopener" class="btn btn-outline">Book a Discovery Call</a>
       </div>
     </div>
@@ -776,24 +810,56 @@
     <div class="section-head reveal">
       <span class="eyebrow">Selected Work</span>
       <h2>Real Communication. Real Practices.</h2>
-      <p>Case studies coming soon as our first engagements complete — swap these placeholder photos for real project stills when ready.</p>
+      <p>A first look at the kind of work Endorphic does — more case studies to follow as engagements complete.</p>
     </div>
     <div class="work-grid reveal">
-      <div class="work-card">
-        <div class="work-media"><img src="https://images.pexels.com/photos/5998448/pexels-photo-5998448.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Doctor introduction film placeholder" width="600" height="450" loading="lazy"></div>
-        <div class="work-body"><div class="tag">Doctor Introduction Film</div><h4>Case study placeholder</h4><p>Swap in your first project's outcome and story here.</p></div>
+      <div class="work-card is-playable" role="button" tabindex="0" aria-label="Play video: Doctor Introduction Film" onclick="openVideoModal('QxaMK1o-Sg0')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('QxaMK1o-Sg0');}">
+        <div class="work-media">
+          <img src="https://img.youtube.com/vi/QxaMK1o-Sg0/hqdefault.jpg" alt="Doctor Introduction Film thumbnail" width="600" height="450" loading="lazy">
+          <div class="work-play-btn"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
+        <div class="work-body">
+          <div class="tag">Doctor Introduction Film</div>
+          <h4>Putting a Face to the Practice</h4>
+          <p>A short, personal introduction film designed to help patients feel like they already know their doctor before the first visit.</p>
+        </div>
       </div>
       <div class="work-card">
-        <div class="work-media"><img src="https://images.pexels.com/photos/8376236/pexels-photo-8376236.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Healthcare website placeholder" width="600" height="450" loading="lazy"></div>
-        <div class="work-body"><div class="tag">Healthcare Website</div><h4>Case study placeholder</h4><p>Swap in your first project's outcome and story here.</p></div>
+        <div class="work-media">
+          <img src="assets/dratuldeshpande-website.jpg" alt="Dr. Atul Deshpande website homepage" width="600" height="450" loading="lazy">
+        </div>
+        <div class="work-body">
+          <div class="tag">Healthcare Website</div>
+          <h4>Dr. Atul Deshpande — Piles &amp; Colorectal Surgeon</h4>
+          <p>A credibility-first website for a leading piles specialist in Ch. Sambhajinagar (Aurangabad) — built around 30+ years of experience, 4,000+ surgeries, and instant WhatsApp booking.</p>
+        </div>
       </div>
-      <div class="work-card">
-        <div class="work-media"><img src="https://images.pexels.com/photos/7446988/pexels-photo-7446988.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Awareness campaign placeholder" width="600" height="450" loading="lazy"></div>
-        <div class="work-body"><div class="tag">Awareness Campaign</div><h4>Case study placeholder</h4><p>Swap in your first project's outcome and story here.</p></div>
+      <div class="work-card is-playable" role="button" tabindex="0" aria-label="Play video: Awareness Campaign" onclick="openVideoModal('LUQ3I0-lV4M')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openVideoModal('LUQ3I0-lV4M');}">
+        <div class="work-media">
+          <img src="https://img.youtube.com/vi/LUQ3I0-lV4M/hqdefault.jpg" alt="Awareness Campaign thumbnail" width="600" height="450" loading="lazy">
+          <div class="work-play-btn"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+        </div>
+        <div class="work-body">
+          <div class="tag">Awareness Campaign</div>
+          <h4>Patient Awareness, Made Simple</h4>
+          <p>A short-form awareness video that breaks down a common health concern into something patients can actually understand — and act on.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ===== VIDEO MODAL ===== -->
+<div class="video-modal" id="videoModal" onclick="if(event.target===this)closeVideoModal();">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" aria-label="Close video" onclick="closeVideoModal()">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="video-modal-frame">
+      <iframe id="videoModalIframe" src="" title="Video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
 
 <!-- ===== TRUSTED BY (dummy placeholder logos) ===== -->
 <div class="logos-section">
@@ -823,7 +889,7 @@
     <div class="founder-quote">
       <span class="eyebrow">04 · Who We Are</span>
       <blockquote>"Healthcare doesn't lack good doctors. It lacks doctors who are understood. So we're building the communication layer that connects clinical excellence to patient trust."</blockquote>
-      <cite>— Founder, Endorphic · Occupational Therapist &amp; Healthcare Communication Specialist</cite>
+      <cite>— Founder, Endorphic · Registered Therapist &amp; Healthcare Communication Specialist</cite>
     </div>
     <div class="standby-grid">
       <div class="standby-item"><span class="snum">01</span><h4>Healthcare-only focus</h4><p>We work exclusively with doctors, clinics and hospitals — nothing else.</p></div>
@@ -850,9 +916,9 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo">
-          <img src="assets/endorphic-logo-nav.png" alt="Endorphic" width="107" height="32" loading="lazy">
+          <img src="assets/endorphic-logo-nav.png" alt="Endorphic" width="107" height="42" loading="lazy">
         </div>
-        <p class="footer-tag">Enabling Better Healthcare — helping doctors, clinics &amp; hospitals communicate with clarity, credibility and impact.</p>
+        <p class="footer-tag">Enabling Better Healthcare — helping doctors, clinics, hospitals &amp; healthcare professionals communicate with clarity, credibility and impact.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
@@ -932,7 +998,26 @@
     });
   });
 
-  const menuToggle = document.querySelector('.menu-toggle');
+  // Video modal for Selected Work cards
+function openVideoModal(videoId){
+  const modal = document.getElementById('videoModal');
+  const iframe = document.getElementById('videoModalIframe');
+  iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeVideoModal(){
+  const modal = document.getElementById('videoModal');
+  const iframe = document.getElementById('videoModalIframe');
+  modal.classList.remove('open');
+  iframe.src = ''; // stops playback immediately instead of continuing in the background
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', (e) => {
+  if(e.key === 'Escape') closeVideoModal();
+});
+
+const menuToggle = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
   menuToggle?.addEventListener('click', () => {
     const isOpen = navLinks.style.display === 'flex';
