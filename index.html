@@ -199,29 +199,34 @@
   /* ===== THE PROBLEM ===== */
   .problem{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
   .problem .wrap{max-width:920px;text-align:center;}
-  .problem h2{font-size:clamp(26px,4vw,42px);margin-bottom:18px;}
-  .problem .lead{font-size:16.5px;color:var(--grey);max-width:640px;margin:0 auto 56px;}
-  .problem-diagram{overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 4px 18px;scrollbar-width:none;}
-  .problem-diagram::-webkit-scrollbar{display:none;}
-  .problem-row{display:flex;align-items:center;justify-content:center;gap:0;width:max-content;margin:0 auto;}
-  .problem-item{
+  .problem h2{font-size:clamp(25px,3.6vw,38px);margin-bottom:18px;}
+  .problem .lead{font-size:16.5px;color:var(--grey);max-width:640px;margin:0 auto 50px;}
+  .ecosystem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:760px;margin:0 auto;}
+  .ecosystem-item{
+    background:var(--paper-2);border:1px solid var(--border);border-radius:16px;padding:20px 14px;
     display:flex;flex-direction:column;align-items:center;gap:10px;
-    font-size:12.5px;font-weight:600;color:var(--grey);white-space:nowrap;
   }
-  .problem-icon{
-    width:52px;height:52px;border-radius:14px;background:var(--paper-2);border:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
+  .ecosystem-icon{width:44px;height:44px;border-radius:12px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;}
+  .ecosystem-icon svg{width:20px;height:20px;stroke:var(--grey);}
+  .ecosystem-item .platform{font-size:13.5px;font-weight:700;color:var(--ink);}
+  .ecosystem-item .caption{font-size:11.5px;color:var(--grey-light);line-height:1.4;}
+  .ecosystem-arrows{display:grid;grid-template-columns:repeat(4,1fr);max-width:760px;margin:14px auto;}
+  .ecosystem-arrows svg{width:16px;height:16px;stroke:var(--border);margin:0 auto;}
+  .ecosystem-hub{
+    max-width:520px;margin:0 auto;background:var(--grad-btn);border-radius:18px;padding:22px 28px;
+    display:flex;align-items:center;gap:16px;justify-content:center;box-shadow:0 16px 34px -14px rgba(22,137,122,.45);
   }
-  .problem-icon svg{width:22px;height:22px;stroke:var(--grey);}
-  .problem-item.hub .problem-icon{background:var(--grad);border-color:transparent;box-shadow:0 10px 24px -10px rgba(22,137,122,.5);}
-  .problem-item.hub .problem-icon svg{stroke:#fff;}
-  .problem-item.hub span.label{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;}
-  .problem-connector{width:36px;height:1.5px;background:repeating-linear-gradient(90deg, var(--border) 0 6px, transparent 6px 10px);flex-shrink:0;margin:0 6px 26px;}
-  @media (max-width:900px){
-    .problem-row{gap:0;}
-    .problem-item{font-size:11.5px;}
-    .problem-icon{width:44px;height:44px;}
-    .problem-connector{width:24px;margin-bottom:22px;}
+  .ecosystem-hub .ecosystem-icon{background:rgba(255,255,255,.18);border-color:transparent;}
+  .ecosystem-hub .ecosystem-icon svg{stroke:#fff;}
+  .ecosystem-hub .platform{color:#fff;font-size:16px;font-weight:800;}
+  .ecosystem-hub .caption{color:rgba(255,255,255,.85);font-size:12.5px;text-align:left;}
+  .ecosystem-hub .text-block{display:flex;flex-direction:column;gap:2px;align-items:flex-start;}
+  @media (max-width:720px){
+    .ecosystem-grid{grid-template-columns:repeat(2,1fr);}
+    .ecosystem-arrows{display:none;}
+    .ecosystem-hub{margin-top:18px;flex-direction:column;text-align:center;}
+    .ecosystem-hub .text-block{align-items:center;}
+    .ecosystem-hub .caption{text-align:center;}
   }
 
   /* ===== SERVICES ===== */
@@ -550,34 +555,44 @@
   </div>
   <div class="wrap">
     <span class="eyebrow" style="justify-content:center;">01 · The Problem</span>
-    <h2>Communication happens in silos. We connect every touchpoint.</h2>
-    <p class="lead">Your website says one thing. Your Google profile says another. Your waiting room says nothing at all. Patients piece together a fragmented picture of you — long before they ever pick up the phone.</p>
-    <div class="problem-diagram">
-      <div class="problem-row">
-        <div class="problem-item">
-          <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M8 4v5" stroke="currentColor" stroke-width="1.8"/></svg></div>
-          <span class="label">Website</span>
-        </div>
-        <div class="problem-connector"></div>
-        <div class="problem-item">
-          <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 8v4l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-          <span class="label">Google Profile</span>
-        </div>
-        <div class="problem-connector"></div>
-        <div class="problem-item hub">
-          <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="14" r="2.4" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="14" r="2.4" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 8.7L7.3 12M14.5 8.7L16.7 12" stroke="currentColor" stroke-width="1.8"/></svg></div>
-          <span class="label">Endorphic</span>
-        </div>
-        <div class="problem-connector"></div>
-        <div class="problem-item">
-          <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1116 0 8 8 0 01-16 0z" stroke="currentColor" stroke-width="1.8"/><path d="M9 10.5c1-1.4 5-1.4 6 0M9 13.5c1 1.4 5 1.4 6 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
-          <span class="label">Social Media</span>
-        </div>
-        <div class="problem-connector"></div>
-        <div class="problem-item">
-          <div class="problem-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0112 6.5 5.5 5.5 0 0121.5 12c-2.5 4.5-9.5 9-9.5 9z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></div>
-          <span class="label">Patient Trust</span>
-        </div>
+    <h2>Platforms manage individual touchpoints. <span class="grad-text">Endorphic evaluates the whole ecosystem.</span></h2>
+    <p class="lead">Practo, Google, Instagram and your website each show patients a different slice of you — and each platform only optimises for itself. No one is looking at whether all of these actually work together to earn a patient's trust.</p>
+
+    <div class="ecosystem-grid">
+      <div class="ecosystem-item">
+        <div class="ecosystem-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <span class="platform">Practo</span>
+        <span class="caption">your Practo presence</span>
+      </div>
+      <div class="ecosystem-item">
+        <div class="ecosystem-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+        <span class="platform">Google</span>
+        <span class="caption">your search presence</span>
+      </div>
+      <div class="ecosystem-item">
+        <div class="ecosystem-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></div>
+        <span class="platform">Instagram</span>
+        <span class="caption">your social presence</span>
+      </div>
+      <div class="ecosystem-item">
+        <div class="ecosystem-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M3 9h18M8 4v5" stroke="currentColor" stroke-width="1.8"/></svg></div>
+        <span class="platform">Website</span>
+        <span class="caption">your owned presence</span>
+      </div>
+    </div>
+
+    <div class="ecosystem-arrows">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v14M6 13l6 6 6-6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v14M6 13l6 6 6-6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v14M6 13l6 6 6-6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 4v14M6 13l6 6 6-6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+
+    <div class="ecosystem-hub">
+      <div class="ecosystem-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="6" cy="14" r="2.4" stroke="currentColor" stroke-width="1.8"/><circle cx="18" cy="14" r="2.4" stroke="currentColor" stroke-width="1.8"/><path d="M9.5 8.7L7.3 12M14.5 8.7L16.7 12" stroke="currentColor" stroke-width="1.8"/></svg></div>
+      <div class="text-block">
+        <span class="platform">Endorphic</span>
+        <span class="caption">How well all of these work together</span>
       </div>
     </div>
   </div>
