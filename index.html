@@ -381,7 +381,7 @@
 
   .compare{background:var(--paper);}
   .compare .wrap{max-width:920px;}
-  .compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:24px;}
+  .compare-scroll{overflow-x:hidden;-webkit-overflow-scrolling:touch;margin-top:24px;}
   .compare-hint{display:none;font-size:12.5px;color:var(--grey-light);margin-top:10px;}
   .compare-table{
     display:grid;grid-template-columns:1fr 1fr 1fr;
@@ -742,8 +742,7 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
+
 
 <!-- ===== VIDEO MODAL ===== -->
 <div class="video-modal" id="videoModal" onclick="if(event.target===this)closeVideoModal();">
@@ -757,6 +756,8 @@
   </div>
 </div>
 
+      </div>
+</section>
   
 <!-- ===== SERVICES ("the promise") ===== -->
 <section class="services" id="services">
