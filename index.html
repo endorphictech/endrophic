@@ -80,6 +80,7 @@
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  html,body{max-width:100%;overflow-x:hidden;}
   body{margin:0;font-family:'Poppins',sans-serif;background:var(--paper);color:var(--grey);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;}
   img,svg{display:block;max-width:100%;}
   img{width:100%;height:100%;object-fit:cover;}
@@ -192,12 +193,12 @@
 
   /* ===== BACKDROP LINE ART (decorative, subtle) ===== */
   section{position:relative;}
-  .line-art{position:absolute;pointer-events:none;opacity:0.06;z-index:0;}
+  .line-art{position:absolute;pointer-events:none;opacity:0.06;z-index:0;overflow:hidden;}
   .line-art svg{width:100%;height:100%;display:block;}
   .problem .wrap, .founder .wrap{position:relative;z-index:1;}
 
   /* ===== THE PROBLEM ===== */
-  .problem{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .problem{background:var(--card);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;}
   .problem .wrap{max-width:920px;text-align:center;}
   .problem h2{font-size:clamp(25px,3.6vw,38px);margin-bottom:18px;}
   .problem .lead{font-size:16.5px;color:var(--grey);max-width:640px;margin:0 auto 50px;}
@@ -275,7 +276,7 @@
   .mock-chat-reply{background:var(--grad-btn);color:#fff;border-radius:12px 12px 4px 12px;padding:8px 14px;font-size:12.5px;font-weight:600;display:inline-block;margin-left:auto;display:block;width:fit-content;margin-bottom:8px;}
   .mock-chat-status{font-size:11px;color:var(--teal-btn);font-weight:600;}
 
-  /* ===== INTERACTIVE MODEL / TABS ===== */
+  /* ===== METHODOLOGY (diagnostic cards) ===== */
   .model{background:var(--paper);}
   .model .wrap{max-width:1100px;}
   .model-head{margin-bottom:36px;}
@@ -290,67 +291,6 @@
     .diagnostic-grid{grid-template-columns:repeat(2,1fr);}
   }
   .model-head h2{font-size:clamp(28px,4vw,44px);font-weight:700;}
-  .model-body{display:grid;grid-template-columns:1fr 1.3fr;gap:32px;align-items:start;}
-  .tab-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-  .tab-btn{
-    display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;gap:22px;
-    font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    padding:20px;border-radius:16px;border:1px solid var(--border);background:var(--card);color:var(--ink);
-    cursor:pointer;transition:background .3s ease,color .3s ease,border-color .3s ease,transform .25s ease;
-    font-family:'Poppins',sans-serif;min-height:118px;text-align:left;
-  }
-  .tab-btn:hover{transform:translateY(-3px);border-color:var(--teal);}
-  .tab-icon{width:36px;height:36px;border-radius:10px;background:var(--paper-2);display:flex;align-items:center;justify-content:center;transition:background .3s ease;}
-  .tab-icon svg{width:18px;height:18px;stroke:var(--ink);}
-  .tab-btn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
-  .tab-btn.active .tab-icon{background:rgba(255,255,255,0.12);}
-  .tab-btn.active .tab-icon svg{stroke:#fff;}
-
-  .model-panel{
-    position:relative;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:32px;
-    background-image:radial-gradient(circle, var(--border) 1px, transparent 1px);background-size:20px 20px;
-    min-height:400px;display:flex;align-items:center;
-  }
-  .panel-content{display:none;width:100%;flex-direction:row;gap:18px;align-items:center;justify-content:space-between;}
-  .panel-content.active{display:flex;animation:panel-in .5s ease;}
-  @keyframes panel-in{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-  .panel-col{flex:1;min-width:0;}
-  .panel-col-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--grey-light);font-weight:600;margin-bottom:14px;}
-  .panel-col.right .panel-col-label{color:var(--teal-btn);}
-  .panel-item{
-    display:flex;align-items:center;gap:10px;background:var(--paper);border:1px solid var(--border);
-    border-radius:14px;padding:12px 14px;margin-bottom:10px;font-size:13px;font-weight:500;color:var(--ink);
-  }
-  .panel-item .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex-shrink:0;}
-  .panel-col.right .panel-item .dot{background:var(--green);}
-  .panel-orb-wrap{flex-shrink:0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;width:150px;}
-
-  .panel-orb{
-    position:relative;width:96px;height:96px;
-    background:radial-gradient(circle at 35% 30%, #eafff0, var(--green) 45%, var(--teal) 100%);
-    box-shadow:0 20px 40px -14px rgba(90,200,90,0.45);
-    animation:orb-breathe 4s ease-in-out infinite, orb-morph 7s ease-in-out infinite;
-  }
-  @keyframes orb-breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
-  @keyframes orb-morph{
-    0%,100%{border-radius:58% 42% 61% 39% / 46% 41% 59% 54%;}
-    33%{border-radius:42% 58% 39% 61% / 61% 46% 54% 39%;}
-    66%{border-radius:63% 37% 47% 53% / 40% 62% 38% 60%;}
-  }
-  .panel-orb::before{
-    content:"";position:absolute;inset:-6px;border-radius:inherit;
-    background:conic-gradient(from 0deg, transparent, rgba(255,255,255,.65), transparent 35%);
-    animation:orb-spin 3.5s linear infinite;
-    mix-blend-mode:overlay;
-  }
-  @keyframes orb-spin{to{transform:rotate(360deg);}}
-  .panel-orb::after{
-    content:"";position:absolute;inset:-14px;border-radius:50%;
-    box-shadow:0 0 0 0 rgba(90,200,90,.45);
-    animation:orb-glow 2.6s ease-out infinite;
-  }
-  @keyframes orb-glow{0%{box-shadow:0 0 0 0 rgba(90,200,90,.4);}70%{box-shadow:0 0 0 18px rgba(90,200,90,0);}100%{box-shadow:0 0 0 0 rgba(90,200,90,0);}}
-  .panel-caption{font-size:12.5px;font-weight:400;font-style:italic;color:var(--grey);max-width:150px;}
 
   /* ===== COMPARISON ===== */
   /* ===== WHATSAPP AUTOMATION ===== */
@@ -379,9 +319,9 @@
     .wa-benefits{gap:18px;flex-direction:column;align-items:center;}
   }
 
-  .compare{background:var(--paper);}
+  .compare{background:var(--paper);overflow:hidden;}
   .compare .wrap{max-width:920px;}
-  .compare-scroll{overflow-x:hidden;-webkit-overflow-scrolling:touch;margin-top:24px;}
+  .compare-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:24px;}
   .compare-hint{display:none;font-size:12.5px;color:var(--grey-light);margin-top:10px;}
   .compare-table{
     display:grid;grid-template-columns:1fr 1fr 1fr;
@@ -465,7 +405,7 @@
   }
 
   /* ===== FOUNDER / STAND BY ===== */
-  .founder{background:var(--ink);color:#fff;}
+  .founder{background:var(--ink);color:#fff;overflow:hidden;}
   .founder .wrap{max-width:980px;}
   .founder-quote{max-width:680px;margin-bottom:64px;}
   .founder .eyebrow{color:#B9D9C9;}
@@ -512,10 +452,6 @@
   @media (max-width:980px){
     .service-row{grid-template-columns:1fr;gap:12px;}
     .proof-grid{grid-template-columns:1fr;}
-    .model-body{grid-template-columns:1fr;}
-    .panel-content{flex-direction:column;text-align:center;}
-    .panel-col{width:100%;}
-    .panel-item{justify-content:center;}
     .work-grid{grid-template-columns:repeat(2,1fr);}
     .standby-grid{grid-template-columns:repeat(2,1fr);}
     .compare-head div,.compare-row div{padding:14px;font-size:12.5px;}
@@ -526,8 +462,6 @@
     .hero{height:92vh;}
     .hero-content{padding:120px 20px 60px;}
     section{padding:70px 20px;}
-    .tab-grid{grid-template-columns:1fr 1fr;}
-    .tab-btn{min-height:96px;padding:16px;}
     .work-grid{grid-template-columns:1fr;}
     .standby-grid{grid-template-columns:1fr;}
     .footer-grid{flex-direction:column;}
@@ -589,14 +523,14 @@
     <button class="hero-dot" data-slide="4"></button>
   </div>
 </section>
-  
+
 <!-- ===== STATEMENT ===== -->
 <section class="statement reveal">
   <div class="wrap">
     <h2>Better communication. <span class="g">Better patient experiences.</span> Better healthcare.</h2>
   </div>
 </section>
-  
+
 <!-- ===== THE PROBLEM ===== -->
 <section class="problem reveal">
   <div class="line-art" style="top:-40px;right:-60px;width:280px;height:280px;">
@@ -647,7 +581,7 @@
   </div>
 </section>
 
-<!-- ===== INTERACTIVE MODEL / TABS ===== -->
+<!-- ===== OUR METHODOLOGY ===== -->
 <section class="model">
   <div class="wrap">
     <div class="model-head reveal">
@@ -677,8 +611,9 @@
         <p>Can they easily take the next step?</p>
       </div>
     </div>
+  </div>
+</section>
 
-   
 <!-- ===== SELECTED WORK ===== -->
 <section class="work" id="selected-work">
   <div class="wrap">
@@ -742,7 +677,8 @@
         </div>
       </div>
     </div>
-
+  </div>
+</section>
 
 <!-- ===== VIDEO MODAL ===== -->
 <div class="video-modal" id="videoModal" onclick="if(event.target===this)closeVideoModal();">
@@ -756,9 +692,6 @@
   </div>
 </div>
 
-      </div>
-</section>
-  
 <!-- ===== SERVICES ("the promise") ===== -->
 <section class="services" id="services">
   <div class="wrap">
@@ -846,8 +779,8 @@
     <span>Dermatologists</span><span>Dentists</span><span>Orthopaedic Surgeons</span><span>ENT Specialists</span><span>Paediatricians</span><span>Gynaecologists</span><span>IVF Specialists</span><span>Multi-Specialty Clinics</span><span>Diagnostic Centres</span><span>Hospitals</span>
     <span>Dermatologists</span><span>Dentists</span><span>Orthopaedic Surgeons</span><span>ENT Specialists</span><span>Paediatricians</span><span>Gynaecologists</span><span>IVF Specialists</span><span>Multi-Specialty Clinics</span><span>Diagnostic Centres</span><span>Hospitals</span>
   </div>
-</div>  
-  
+</div>
+
 <!-- ===== PROOF CARDS: Reviews / Website / Recalls ===== -->
 <section class="proof">
   <div class="wrap">
@@ -938,7 +871,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- ===== TRUSTED BY (dummy placeholder logos) ===== -->
 <!-- Hidden until we have real client logos to show. Remove style="display:none" below to bring this back online. -->
@@ -1046,18 +978,6 @@
   if(!prefersReduced){
     setInterval(()=>{ showSlide((heroIdx+1) % slides.length); }, 5000);
   }
-
-  // Interactive model tabs
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const panels = document.querySelectorAll('.panel-content');
-  tabBtns.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      tabBtns.forEach(b=>b.classList.remove('active'));
-      panels.forEach(p=>p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
-    });
-  });
 
   // Video modal for Selected Work cards
 function openVideoModal(videoId){
